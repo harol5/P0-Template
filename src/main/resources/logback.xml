@@ -6,8 +6,36 @@
         </encoder>
     </appender>
 
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- the file tags tells logback where we want our log file to be saved -->
+        <file>logs/staticLogs.log</file>
+        <!-- the "append" tag tells Logback whether to append the file or create a new one each time the app starts -->
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/rollingFile.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- this sets the pattern for how to create the new log files -->
+            <fileNamePattern>logs/rollingLogFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- this determines how many days worth of logs should be saved -->
+            <maxHistory>7</maxHistory>
+            <!-- this determines the max size of the log file: can trigger a rollover before the max days -->
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ROLLING"/>
     </root>
 
 </configuration>

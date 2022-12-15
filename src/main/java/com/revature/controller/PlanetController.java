@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
+import com.revature.MainDriver;
 import com.revature.models.Moon;
 import com.revature.models.Planet;
 import com.revature.models.User;
@@ -11,8 +12,9 @@ import com.revature.service.PlanetService;
 import io.javalin.http.Context;
 import io.javalin.validation.Validator;
 
+
 public class PlanetController {
-	
+
 	private PlanetService pService = new PlanetService();
 
 	public void getAllPlanets(Context ctx) {
@@ -34,7 +36,7 @@ public class PlanetController {
 		
 		User u = ctx.sessionAttribute("user");
 		int planetId = ctx.pathParamAsClass("id", Integer.class).get();
-		
+
 		Planet p = pService.getPlanetById(u.getUsername(), planetId);
 		
 		ctx.json(p).status(200);

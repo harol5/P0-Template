@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 
+	//the lombok dependency will generate getters and setters for the fields below at runtime.
 	private int id;
 	private String username;
 	private String password;
