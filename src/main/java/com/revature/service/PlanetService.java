@@ -40,8 +40,4 @@ public class PlanetService {
 		this.dao.deletePlanetById(planetId);
 	}
 
-//	public static void main(String[] args) {
-//		PlanetService planetService = new PlanetService();
-//		System.out.println(planetService.getPlanetById(" ", 1));
-//	}
 }

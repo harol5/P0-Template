@@ -20,6 +20,7 @@ public class PlanetController {
 	public void getAllPlanets(Context ctx) {
 		
 		ctx.json(pService.getAllPlanets()).status(200);
+
 	}
 
 	public void getPlanetByName(Context ctx) {

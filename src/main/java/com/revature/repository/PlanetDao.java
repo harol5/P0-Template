@@ -4,11 +4,17 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.revature.MainDriver;
 import com.revature.models.Planet;
 import com.revature.models.User;
 import com.revature.utilities.ConnectionUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PlanetDao {
+
+	public static Logger logger = LoggerFactory.getLogger(MainDriver.class);
 
 	/*
 	 * added the throws clause to the method signature because the alternative is to return an empty
@@ -64,7 +70,7 @@ public class PlanetDao {
 			planet.setOwnerId(rs.getInt(3));
 			return planet;
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return new Planet();
 		}
 	}
@@ -117,26 +123,4 @@ public class PlanetDao {
 			System.out.println(e.getMessage()); // good spot to add some logging?
 		}
 	}
-
-//	public static void main(String[] args) {
-//		PlanetDao planetDao = new PlanetDao();
-//		//--------------------------------------
-////		Planet newPlanet = new Planet();
-////		newPlanet.setName("saturn");
-////		newPlanet.setOwnerId(2);
-////		System.out.println(planetDao.createPlanet("Harol", newPlanet));
-////		//--------------------------------------
-////		planetDao.deletePlanetById(3);
-//		//--------------------------------------
-////		try {
-////			System.out.println(planetDao.getAllPlanets());
-////		} catch (Exception e) {
-////			System.out.println(e.getMessage());
-////		}
-//
-//		System.out.println(planetDao.getPlanetById("Laura", 1));
-//
-//		System.out.println(planetDao.getPlanetByName("Harol", "earth"));
-//
-//	}
 }
