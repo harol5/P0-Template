@@ -1,4 +1,4 @@
-httpCodes=$(grep Response rollingLogFile.2022-12-14.log | cut -f 1 -d ,| cut -f 2 -d : | cut -f 2 -d [ | cut -f 1 -d ] | cut -f 1 -d ' ')
+httpCodes=$(grep Response rollingFile.log | cut -f 1 -d ,| cut -f 2 -d : | cut -f 2 -d [ | cut -f 1 -d ] | cut -f 1 -d ' ')
 executionTime=$(grep execution rollingLogFile.2022-12-15.log | cut -f 2 -d , | cut -f 4 -d ' ')
 
 httpRequestTotal=0
@@ -34,4 +34,4 @@ resultExecutionSuccess=$(echo "scale=2; $executionSuccess / $httpRequestTotal" |
 
 echo "total requests: $httpRequestTotal"
 echo "HTTP success rate: $resultHttpSuccess%"
-echo "Execution success rate: $resultExecutionSuccess%"
+echo "Executions within 200ms: $resultExecutionSuccess%"
