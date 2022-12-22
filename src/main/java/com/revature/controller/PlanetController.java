@@ -29,8 +29,12 @@ public class PlanetController {
 		String planetName = ctx.pathParam("name");
 		
 		Planet p = pService.getPlanetByName(u.getUsername(), planetName);
-		
-		ctx.json(p).status(200);
+
+		if(p.getId() != 0){
+			ctx.json(p).status(200);
+		}else {
+			ctx.result("Planet does not exits").status(404);
+		}
 	}
 
 	public void getPlanetByID(Context ctx) {
@@ -39,8 +43,12 @@ public class PlanetController {
 		int planetId = ctx.pathParamAsClass("id", Integer.class).get();
 
 		Planet p = pService.getPlanetById(u.getUsername(), planetId);
-		
-		ctx.json(p).status(200);
+
+		if(p.getId() != 0){
+		   ctx.json(p).status(200);
+		}else {
+		   ctx.result("Planet does not exits").status(404);
+		}
 	}
 
 
@@ -48,10 +56,15 @@ public class PlanetController {
 		
 		Planet planetToBeCreated = ctx.bodyAsClass(Planet.class);
 		User u = ctx.sessionAttribute("user");
-		
-		Planet createdPlanet = pService.createPlanet(u.getUsername(),planetToBeCreated);
-		
-		ctx.json(createdPlanet).status(201);
+
+		Planet p = pService.getPlanetByName(u.getUsername(), planetToBeCreated.getName());
+		//to make this work, i have to create a new method that get planet by owner id.
+		if(planetToBeCreated.getName().equals( p.getName() ) && planetToBeCreated.getOwnerId() == p.getOwnerId()){
+			ctx.result("Planet already created").status(404);
+		}else {
+			Planet createdPlanet = pService.createPlanet(u.getUsername(),planetToBeCreated);
+			ctx.json(createdPlanet).status(201);
+		}
 	}
 
 	public void deletePlanet(Context ctx) {
