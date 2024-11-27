@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.revature.MainDriver;
 import com.revature.models.Planet;
-import com.revature.models.User;
 import com.revature.utilities.ConnectionUtil;
 
 import org.slf4j.Logger;
@@ -17,9 +16,9 @@ public class PlanetDao {
 	public static Logger logger = LoggerFactory.getLogger(MainDriver.class);
 
 	/*
-	 * added the throws clause to the method signature because the alternative is to return an empty
+	 * added the throws' clause to the method signature because the alternative is to return an empty
 	 * arraylist, but the method could succeed with no planets returned, so this is not an ideal solution.
-	 * Instead we will let the service layer and/or API handle the exception being thrown
+	 * Instead, we will let the service layer and/or API handle the exception being thrown
 	 */
     public List<Planet> getAllPlanets() throws SQLException{
 		try(Connection connection = ConnectionUtil.createConnection())  {

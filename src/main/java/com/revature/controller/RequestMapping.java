@@ -4,6 +4,10 @@ import com.revature.exceptions.NotLoggedInException;
 
 import io.javalin.Javalin;
 
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
+import org.jetbrains.annotations.NotNull;
+
 public class RequestMapping {
 	
 	private static AuthenticateController authController = new AuthenticateController();
@@ -11,9 +15,19 @@ public class RequestMapping {
 	private static MoonController moonController = new MoonController();
 	
 	public static void setupEndpoints(Javalin app) {
-		
+
+		// -------------- this is just an example of how to use anonymous classes.
+		Handler myHandler = new Handler() {
+			@Override
+			public void handle(@NotNull Context context) throws Exception {
+				authController.authenticate(context);
+			}
+		};
+
 		// Authenticate user and create a session for the user, sending username/password in the body as JSON
-		app.post("/login", ctx -> authController.authenticate(ctx));
+		app.post("/login", myHandler);
+
+		//--------------------------
 
 		// Register a new user, sending username/password in the body as JSON
 		app.post("/register", ctx -> authController.register(ctx));

@@ -28,7 +28,7 @@ public class UserDao {
 
     public User createUser(UsernamePasswordAuthentication registerRequest){
         /*
-         * we will be making use of a try-with-resource block. This is a convinience provided starting in java
+         * we will be making use of a try-with-resource block. This is a convenience provided starting in java
          * 8 that allows us to "close" resources we open without having to explicitly write the code to
          * do so. This is a necessary action for our connection object we will be creating because our database can
          * only handle so many open connections at a time.
